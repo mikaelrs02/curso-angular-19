@@ -1,0 +1,132 @@
+// _variables.scss (criar arquivo separado ou adicionar no topo)
+$toolbar-height: 64px;
+$toolbar-spacing: 16px;
+$icon-spacing: 8px;
+$transition-speed: 0.3s;
+
+// Toolbar principal
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: $toolbar-height;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  // Título
+  > span:first-of-type {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Spacer para alinhamento
+.spacer {
+  flex: 1 1 auto;
+}
+
+// Links de navegação
+a {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  margin: 0 $toolbar-spacing;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all $transition-speed ease;
+  font-weight: 400;
+  
+  // Ícones
+  mat-icon {
+    margin-right: $icon-spacing;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  // Estados
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  // Link ativo (quando na rota atual)
+  &.active-link {
+    background-color: rgba(255, 255, 255, 0.25);
+    font-weight: 500;
+  }
+  
+  // Responsividade
+  @media (max-width: 600px) {
+    margin: 0 8px;
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    
+    span:not(.mat-icon) {
+      display: none; // Esconde o texto em telas pequenas
+    }
+    
+    mat-icon {
+      margin-right: 0;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+// Container do router outlet
+router-outlet + * {
+  display: block;
+  padding: 24px;
+  
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
+}
+
+// Animações
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+mat-toolbar {
+  animation: fadeIn 0.5s ease-out;
+}
+
+// Efeito de destaque no título
+mat-toolbar span:first-of-type {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.5s ease;
+  }
+  
+  &:hover::after {
+    width: 100%;
+  }
+}
