@@ -1,0 +1,132 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+<<<<<<< HEAD
+    "crud-angular-material": {
+=======
+    "conceitos-basicos": {
+>>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+<<<<<<< HEAD
+            "outputPath": "dist/crud-angular-material",
+=======
+            "outputPath": "dist/conceitos-basicos",
+>>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+<<<<<<< HEAD
+              "@angular/material/prebuilt-themes/azure-blue.css",
+=======
+>>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+<<<<<<< HEAD
+              "buildTarget": "crud-angular-material:build:production"
+            },
+            "development": {
+              "buildTarget": "crud-angular-material:build:development"
+=======
+              "buildTarget": "conceitos-basicos:build:production"
+            },
+            "development": {
+              "buildTarget": "conceitos-basicos:build:development"
+>>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+<<<<<<< HEAD
+              "@angular/material/prebuilt-themes/azure-blue.css",
+=======
+>>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+<<<<<<< HEAD
+    "analytics": "369b620c-bd61-4a5c-aeb1-762ebbeb5ca2"
+=======
+    "analytics": "6b2eccfe-ae7c-40ac-99c7-962677b98d4b"
+>>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
+  }
+}
