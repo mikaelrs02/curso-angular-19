@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # CrudAngularMaterial
-=======
-# ConceitosBasicos
->>>>>>> 869d70812ea7d7cd2a32bdf3f63605d88ec37d49
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
