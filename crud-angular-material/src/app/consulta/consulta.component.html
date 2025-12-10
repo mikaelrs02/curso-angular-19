@@ -1,1 +1,44 @@
-<p>consulta works!</p>
+<div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="row" fxFlex="1000px">
+    <form class="mt-60" #buscaForm="ngForm">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>search</mat-icon>
+            Consulta de Clientes
+          </mat-card-title>
+          <mat-card-subtitle>Digite o nome para buscar clientes</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-divider></mat-divider>
+        
+        <mat-card-content class="mt-20">
+          <div fxLayout="row">
+            <div fxLayout="column" fxFlex="950px">
+              <mat-form-field>
+                <mat-label>Nome</mat-label>
+                <input 
+                  matInput 
+                  placeholder="ex: Mikael Ribeiro"
+                  name="nome"
+                >
+                <mat-icon matPrefix>person</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        
+        <mat-card-actions align="end">
+          <button mat-button type="button" color="warn">
+            <mat-icon>clear</mat-icon>
+            Limpar
+          </button>
+          <button mat-raised-button type="submit" color="primary">
+            <mat-icon>search</mat-icon>
+            Buscar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</div>

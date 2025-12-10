@@ -1,0 +1,127 @@
+// Apenas ajustes de espaçamento e layout - mantendo padrão Material
+:host {
+  display: block;
+  padding: 16px;
+}
+
+// Layout responsivo do container
+[fxFlex="1000px"] {
+  max-width: 1000px;
+  width: 100%;
+}
+
+// Card do formulário
+mat-card {
+  margin: 0 auto;
+  
+  mat-card-header {
+    margin-bottom: 24px;
+    
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 500;
+      
+      mat-icon {
+        color: #3f51b5;
+      }
+    }
+    
+    mat-card-subtitle {
+      color: rgba(0, 0, 0, 0.6);
+      margin-top: 4px;
+    }
+  }
+  
+  mat-card-content {
+    padding: 0 16px;
+    
+    // Espaçamento entre os campos
+    > div {
+      > mat-form-field {
+        display: block;
+        width: 100%;
+        
+        // Ícones dentro dos campos
+        mat-icon[matPrefix] {
+          margin-right: 12px;
+          color: rgba(0, 0, 0, 0.54);
+        }
+      }
+    }
+  }
+  
+  mat-card-actions {
+    padding: 16px;
+    margin: 0;
+    
+    button {
+      margin-left: 8px;
+      
+      mat-icon {
+        margin-right: 8px;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+}
+
+// Classes de utilidade
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-60 {
+  margin-top: 60px;
+}
+
+// Responsividade
+@media (max-width: 600px) {
+  :host {
+    padding: 8px;
+  }
+  
+  mat-card {
+    mat-card-header {
+      mat-card-title {
+        font-size: 20px;
+        gap: 8px;
+        
+        mat-icon {
+          font-size: 24px;
+        }
+      }
+    }
+    
+    mat-card-content {
+      padding: 0 8px;
+      
+      .mt-20 {
+        margin-top: 16px;
+      }
+    }
+    
+    mat-card-actions {
+      padding: 12px 8px;
+      
+      button {
+        margin-left: 4px;
+        
+        // Em telas pequenas, mostra só ícones se necessário
+        span:not(.mat-icon) {
+          display: inline;
+        }
+      }
+    }
+  }
+  
+  // Ajuste para o container em telas pequenas
+  [fxFlex="1000px"] {
+    max-width: 100%;
+    width: 100%;
+  }
+}
