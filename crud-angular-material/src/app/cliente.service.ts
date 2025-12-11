@@ -15,8 +15,14 @@ export class ClienteService {
     storage.push(cliente);
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
   }
-  pesquisarClientes(nome: string): Cliente[] {
-    return this.obterStorage();
+  pesquisarClientes(nomeBusca: string): Cliente[] {
+    const clientes = this.obterStorage();
+
+    if(!nomeBusca){
+      return clientes;
+    }
+
+    return clientes.filter(cliente => cliente.nome?.indexOf(nomeBusca) !== -1);
   }
 
   obterStorage(): Cliente[] {
@@ -29,6 +35,11 @@ export class ClienteService {
     const clientes: Cliente[] = [];
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(clientes));
     return clientes;
+  }
+
+  buscarClientePorId(id: string): Cliente | undefined { 
+    const clientes = this.obterStorage();
+    return clientes.find(cliente => cliente.id === id);
   }
 
 }

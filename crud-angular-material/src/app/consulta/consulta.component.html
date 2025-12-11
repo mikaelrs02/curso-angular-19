@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="row" fxFlex="1000px">
-    <form class="mt-60" #buscaForm="ngForm">
+    <form class="mt-60" #buscaForm="ngForm" (ngSubmit)="pesquisar()">
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -19,7 +19,7 @@
             <div fxLayout="column" fxFlex="950px">
               <mat-form-field>
                 <mat-label>Nome</mat-label>
-                <input matInput placeholder="ex: Mikael Ribeiro" name="nome" />
+                <input matInput placeholder="ex: Mikael Ribeiro" name="nomeBusca" [(ngModel)]="nomeBusca" />
                 <mat-icon matPrefix>person</mat-icon>
               </mat-form-field>
             </div>
@@ -72,9 +72,9 @@
 
           <!-- Ações Column -->
           <ng-container matColumnDef="acoes">
-            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let cliente">
-              <button mat-icon-button color="primary">
+              <button mat-icon-button color="primary" (click)="preparaEditar(cliente.id)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button color="warn">
