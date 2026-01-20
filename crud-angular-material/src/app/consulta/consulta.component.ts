@@ -10,9 +10,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ClienteService } from '../cliente.service';
-import { Cliente } from '../cadastro/cliete';
+import { Cliente } from '../cadastro/cliete'; // Note o nome do arquivo: "cliete"
 
 @Component({
   selector: 'app-consulta',
@@ -27,7 +28,8 @@ import { Cliente } from '../cadastro/cliete';
     MatTableModule,
     MatDividerModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss'
@@ -36,13 +38,13 @@ export class ConsultaComponent implements OnInit {
 
   nomeBusca = '';
   listaClientes: Cliente[] = [];
-  colunasTable: string[] = ['nome', 'cpf', 'dataNascimento', 'email', 'acoes'];
+  colunasTable: string[] = ['id', 'nome', 'cpf', 'dataNascimento', 'email', 'ufMunicipio', 'acoes'];
   deletando: string | null = null;
 
   constructor(
     private service: ClienteService,
     private router: Router,
-    private snackBar: MatSnackBar   // ✅ INJETADO
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +53,25 @@ export class ConsultaComponent implements OnInit {
 
   pesquisar(): void {
     this.listaClientes = this.service.pesquisarClientes(this.nomeBusca);
+  }
+
+  // Método para limpar a busca
+  limparBusca(): void {
+    this.nomeBusca = '';
+    this.listaClientes = this.service.pesquisarClientes('');
+    this.deletando = null;
+  }
+
+  // Método para formatar CPF
+  formatarCPF(cpf: string): string {
+    if (!cpf) return '';
+    
+    const cleaned = cpf.replace(/\D/g, '');
+    
+    if (cleaned.length === 11) {
+      return cleaned.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+    return cpf;
   }
 
   preparaEditar(id: string): void {
@@ -66,7 +87,7 @@ export class ConsultaComponent implements OnInit {
     this.listaClientes = this.service.pesquisarClientes(this.nomeBusca);
     this.deletando = null;
 
-    // ✅ SNACKBAR DE SUCESSO
+    // Snackbar de sucesso
     this.mostrarSucesso('Cliente removido com sucesso!');
   }
 
@@ -79,6 +100,18 @@ export class ConsultaComponent implements OnInit {
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
+      panelClass: ['success-snackbar']
     });
   }
+  formatarUfMunicipio(cliente: any): string {
+  if (cliente.uf && cliente.municipio) {
+    return `${cliente.uf}-${cliente.municipio}`;
+  } else if (cliente.uf) {
+    return cliente.uf;
+  } else if (cliente.municipio) {
+    return cliente.municipio;
+  } else {
+    return 'Não informado';
+  }
+}
 }

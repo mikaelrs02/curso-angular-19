@@ -1,127 +1,546 @@
-// Apenas ajustes de espaçamento e layout - mantendo padrão Material
-:host {
-  display: block;
-  padding: 16px;
-}
+$primary-color: #3f51b5;
+$primary-light: #757de8;
+$primary-dark: #002984;
+$warn-color: #f44336;
+$success-color: #4caf50;
+$light-gray: #f5f5f5;
+$medium-gray: #e0e0e0;
+$dark-gray: #757575;
+$border-color: #ddd;
+$shadow-light: 0 2px 6px rgba(0, 0, 0, 0.08);
+$shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+$border-radius: 8px;
+$transition-speed: 0.2s;
 
-// Layout responsivo do container
-[fxFlex="1000px"] {
-  max-width: 1000px;
+
+.consulta-container {
+  padding: 1.5rem;
+  max-width: 1750px;
+  margin: 0 auto;
+  background-color: #fafafa;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; 
   width: 100%;
 }
 
-// Card do formulário
-mat-card {
-  margin: 0 auto;
+.page-header {
+  margin-bottom: 1.5rem;
+  width: 100%;
   
-  mat-card-header {
-    margin-bottom: 24px;
-    
-    mat-card-title {
+  .header-content {
+    .title-section {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 24px;
-      font-weight: 500;
+      gap: 0.75rem;
+      margin-bottom: 0.25rem;
       
-      mat-icon {
-        color: #3f51b5;
+      .header-icon {
+        font-size: 2rem;
+        height: 2rem;
+        width: 2rem;
+        color: $primary-color;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+        white-space: nowrap;
       }
     }
     
-    mat-card-subtitle {
-      color: rgba(0, 0, 0, 0.6);
-      margin-top: 4px;
+    .subtitle {
+      font-size: 0.95rem;
+      color: $dark-gray;
+      margin: 0;
+      padding-left: 2.75rem;
     }
   }
+}
+
+// Card de busca
+.search-card {
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  margin-bottom: 1.5rem;
+  border: 1px solid $medium-gray;
+  background: white;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+  min-height: fit-content;
   
-  mat-card-content {
-    padding: 0 16px;
+  .search-form {
+    padding: 0.75rem 1.25rem; 
     
-    // Espaçamento entre os campos
-    > div {
-      > mat-form-field {
-        display: block;
-        width: 100%;
+    .form-row {
+      margin-bottom: 0.75rem; 
+      width: 100%;
+    }
+    
+    .search-field {
+      width: 100%;
+      max-width: 100%;
+      
+      // INPUT MAIS BAIXO
+      ::ng-deep .mat-mdc-form-field {
+        .mat-mdc-form-field-flex {
+          height: 42px !important;
+        }
         
-        // Ícones dentro dos campos
-        mat-icon[matPrefix] {
-          margin-right: 12px;
-          color: rgba(0, 0, 0, 0.54);
+        input.mat-mdc-input-element {
+          height: 24px; 
+          padding: 0.3rem 0;
+        }
+      }
+      
+      .prefix-icon {
+        color: $primary-color;
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+      }
+      
+      .clear-button {
+        color: $dark-gray;
+        font-size: 1.2rem;
+        
+        &:hover {
+          color: $warn-color;
         }
       }
     }
-  }
-  
-  mat-card-actions {
-    padding: 16px;
-    margin: 0;
     
-    button {
-      margin-left: 8px;
+    // BOTÕES MANTIDOS IGUAIS
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      padding-top: 0.5rem;
       
-      mat-icon {
-        margin-right: 8px;
-        font-size: 20px;
-        height: 20px;
-        width: 20px;
-      }
-    }
-  }
-}
-
-// Classes de utilidade
-.mt-20 {
-  margin-top: 20px;
-}
-
-.mt-60 {
-  margin-top: 60px;
-}
-
-// Responsividade
-@media (max-width: 600px) {
-  :host {
-    padding: 8px;
-  }
-  
-  mat-card {
-    mat-card-header {
-      mat-card-title {
-        font-size: 20px;
-        gap: 8px;
+      .clear-btn, .search-btn {
+        border-radius: 4px;
+        padding: 0.35rem 1rem;
+        font-size: 0.85rem;
+        height: 34px;
+        min-width: 110px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all $transition-speed;
         
         mat-icon {
-          font-size: 24px;
+          margin-right: 0.4rem;
+          font-size: 1rem;
+          height: 1rem;
+          width: 1rem;
         }
       }
-    }
-    
-    mat-card-content {
-      padding: 0 8px;
       
-      .mt-20 {
-        margin-top: 16px;
-      }
-    }
-    
-    mat-card-actions {
-      padding: 12px 8px;
-      
-      button {
-        margin-left: 4px;
+      .clear-btn {
+        border: 1px solid $medium-gray;
+        background: white;
+        color: $dark-gray;
         
-        // Em telas pequenas, mostra só ícones se necessário
-        span:not(.mat-icon) {
-          display: inline;
+        &:hover {
+          background-color: #f8f9fa;
+          border-color: $warn-color;
+          color: $warn-color;
+        }
+      }
+      
+      .search-btn {
+        background-color: $primary-color;
+        color: white;
+        font-weight: 500;
+        
+        &:hover:not([disabled]) {
+          background-color: $primary-dark;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        &:active:not([disabled]) {
+          transform: translateY(1px);
+        }
+        
+        &[disabled] {
+          background-color: $medium-gray;
+          cursor: not-allowed;
+          opacity: 0.6;
         }
       }
     }
   }
+}
+.results-section {
+  flex: 1;
+  min-height: 300px;
+  width: 100%;
   
-  // Ajuste para o container em telas pequenas
-  [fxFlex="1000px"] {
-    max-width: 100%;
+  .results-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $primary-light;
+    
+    .results-icon {
+      font-size: 1.5rem;
+      height: 1.5rem;
+      width: 1.5rem;
+      color: $primary-color;
+    }
+    
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+    
+    .results-count {
+      margin-left: auto;
+      background-color: $primary-light;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+  }
+  
+  .table-container {
+    background: white;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
+    overflow: hidden; 
+    border: 1px solid $border-color;
+    max-height: 400px;
     width: 100%;
+  }
+}
+
+.clients-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  table-layout: fixed; 
+  
+  .header-row {
+    background-color: $primary-color;
+    height: 45px;
+    
+    .header-cell {
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border-bottom: none;
+      padding: 0.75rem 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      
+      &:nth-child(1) { width: 10%; }  // ID
+      &:nth-child(2) { width: 20%; }  // Nome
+      &:nth-child(3) { width: 12%; }  // CPF
+      &:nth-child(4) { width: 10%; }  // Data Nasc.
+      &:nth-child(5) { width: 20%; }  // Email
+      &:nth-child(6) { width: 15%; }  // UF/Município (NOVA COLUNA)
+      &:nth-child(7) { width: 13%; }  // Ações
+      
+      &.actions-header {
+        text-align: center;
+      }
+    }
+  }
+
+  .data-row {
+    height: 50px;
+    transition: background-color $transition-speed;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.03);
+    }
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid $light-gray;
+    }
+    
+    .cell {
+      padding: 0.75rem 0.5rem;
+      border-bottom: none;
+      vertical-align: middle;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      
+      &.id-cell {
+        .id-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          
+          .id-icon {
+            font-size: 1rem;
+            color: $dark-gray;
+            flex-shrink: 0;
+          }
+          
+          .id-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.8rem;
+            color: $dark-gray;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      
+      &.name-cell {
+        .name-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          
+          .person-icon {
+            color: $primary-color;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+          }
+          
+          .name-text {
+            font-weight: 500;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      
+      &.cpf-cell {
+        .cpf-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          
+          .cpf-icon {
+            color: $primary-color;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+          }
+          
+          .cpf-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: #333;
+            letter-spacing: 0.3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      
+      &.date-cell {
+        .date-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          
+          .date-icon {
+            color: $primary-color;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+          }
+          
+          .date-text {
+            color: #333;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        
+        .no-date {
+          color: $dark-gray;
+          font-style: italic;
+          font-size: 0.85rem;
+        }
+      }
+      
+      &.email-cell {
+        .email-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          
+          .email-icon {
+            color: $primary-color;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+          }
+          
+          .email-link {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+      
+      &.uf-municipio-cell {
+        .uf-municipio-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          
+          .location-icon {
+            color: $primary-color;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+          }
+          
+          .uf-municipio-text {
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      
+      &.actions-cell {
+        text-align: center;
+        
+        .actions-wrapper {
+          display: flex;
+          justify-content: center;
+          gap: 0.4rem;
+          
+          .action-btn {
+            transition: all $transition-speed;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            
+            &:hover {
+              transform: scale(1.05);
+            }
+            
+            &.edit-btn {
+              background-color: $primary-color;
+              color: white;
+              
+              &:hover {
+                background-color: $primary-dark;
+              }
+            }
+            
+            &.delete-btn {
+              background-color: rgba($warn-color, 0.1);
+              color: $warn-color;
+              
+              &:hover {
+                background-color: $warn-color;
+                color: white;
+              }
+            }
+            
+            &.confirm-btn, &.cancel-btn {
+              width: 30px;
+              height: 30px;
+            }
+            
+            &.confirm-btn {
+              background-color: $success-color;
+              color: white;
+            }
+            
+            &.cancel-btn {
+              background-color: $medium-gray;
+              color: #333;
+            }
+            
+            mat-icon {
+              font-size: 1.1rem;
+              height: 1.1rem;
+              width: 1.1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.no-results {
+  margin-top: 1.5rem;
+  flex: 1;
+  width: 100%;
+  
+  .empty-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow-light;
+    background: white;
+    width: 100%;
+    
+    .empty-content {
+      .empty-icon {
+        font-size: 3rem;
+        height: 3rem;
+        width: 3rem;
+        color: $medium-gray;
+        margin-bottom: 0.75rem;
+      }
+      
+      h3 {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        color: $dark-gray;
+        margin-bottom: 1.25rem;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.95rem;
+      }
+      
+      button {
+        border-radius: 20px;
+        padding: 0.4rem 1.5rem;
+        font-size: 0.9rem;
+        
+        mat-icon {
+          margin-right: 0.5rem;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+::ng-deep .success-snackbar {
+  background-color: $success-color;
+  color: white;
+  
+  .mat-simple-snackbar-action {
+    color: white;
   }
 }

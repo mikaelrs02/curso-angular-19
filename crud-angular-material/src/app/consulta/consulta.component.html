@@ -1,116 +1,174 @@
-<div fxLayout="row" fxLayoutAlign="center">
-  <div fxLayout="row" fxFlex="1000px">
-    <form class="mt-60" #buscaForm="ngForm" (ngSubmit)="pesquisar()">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <mat-icon>search</mat-icon>
-            Consulta de Clientes
-          </mat-card-title>
-          <mat-card-subtitle
-            >Digite o nome para buscar clientes</mat-card-subtitle
-          >
-        </mat-card-header>
-
-        <mat-divider></mat-divider>
-
-        <mat-card-content class="mt-20">
-          <div fxLayout="row">
-            <div fxLayout="column" fxFlex="950px">
-              <mat-form-field>
-                <mat-label>Nome</mat-label>
-                <input
-                  matInput
-                  placeholder="ex: Mikael Ribeiro"
-                  name="nomeBusca"
-                  [(ngModel)]="nomeBusca"
-                />
-                <mat-icon matPrefix>person</mat-icon>
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
-
-        <mat-card-actions align="end">
-          <button mat-button type="button" color="warn">
-            <mat-icon>clear</mat-icon>
-            Limpar
-          </button>
-          <button mat-raised-button type="submit" color="primary">
-            <mat-icon>search</mat-icon>
-            Buscar
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </form>
+<div class="consulta-container">
+  <!-- Cabeçalho da página -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <mat-icon class="header-icon">search</mat-icon>
+        <h1>Consulta de Clientes</h1>
+      </div>
+      <p class="subtitle">Busque clientes pelo nome</p>
+    </div>
   </div>
-</div>
 
-<div fxLayout="row" fxLayoutAlign="center" class="mt-20">
-  <div fxLayout="row" fxFlex="1000px">
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>Resultado</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <table mat-table [dataSource]="listaClientes" class="mat-elevation-z8">
-          <!-- id Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>ID:</th>
-            <td mat-cell *matCellDef="let cliente">{{ cliente.id }}</td>
-          </ng-container>
+  <!-- Card de Busca -->
+  <mat-card class="search-card">
+    <mat-card-content>
+      <form #buscaForm="ngForm" (ngSubmit)="pesquisar()" class="search-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Nome do cliente</mat-label>
+            <input matInput placeholder="Ex: Mikael Ribeiro" name="nomeBusca" [(ngModel)]="nomeBusca" class="search-input"/>
+            <mat-icon matPrefix class="prefix-icon">person</mat-icon>
+            <button mat-icon-button matSuffix *ngIf="nomeBusca" (click)="limparBusca()" type="button" class="clear-button">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
 
-          <ng-container matColumnDef="nome">
-            <th mat-header-cell *matHeaderCellDef>Nome:</th>
-            <td mat-cell *matCellDef="let cliente">{{ cliente.nome }}</td>
-          </ng-container>
-          <ng-container matColumnDef="dataNascimento">
-            <th mat-header-cell *matHeaderCellDef>Data de Nascimento:</th>
-            <td mat-cell *matCellDef="let cliente">
-              {{ cliente.dataNascimento | date : "dd/MM/yyyy" }}
-            </td>
-          </ng-container>
+        <div class="form-actions">
+          <button mat-stroked-button type="button" color="warn" (click)="limparBusca()" class="clear-btn">
+            <mat-icon>delete_sweep</mat-icon>
+            Limpar Busca
+          </button>
 
-          <!-- Email Column -->
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>Email:</th>
-            <td mat-cell *matCellDef="let cliente">{{ cliente.email }}</td>
-          </ng-container>
+          <button mat-raised-button type="submit" color="primary" class="search-btn"[disabled]="!nomeBusca">
+            <mat-icon>search</mat-icon>
+            Buscar Clientes
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-          <!-- Ações Column -->
-          <ng-container matColumnDef="acoes">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let cliente">
-              <button
-                mat-icon-button
-                color="primary"
-                (click)="preparaEditar(cliente.id)"
-              >
+  <!-- Resultados da Busca -->
+  <div class="results-section" *ngIf="listaClientes && listaClientes.length > 0">
+    <div class="results-header">
+      <mat-icon class="results-icon">list_alt</mat-icon>
+      <h2>Resultado da busca</h2>
+      <span class="results-count">{{ listaClientes.length }} cliente(s) encontrado(s)</span>
+    </div>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="listaClientes" class="clients-table">
+        
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef class="header-cell">ID</th>
+          <td mat-cell *matCellDef="let cliente" class="cell id-cell">
+            <div class="id-wrapper">
+              <mat-icon class="id-icon">fingerprint</mat-icon>
+              <span class="id-text">{{ cliente.id | slice:0:8 }}...</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- NOME -->
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef class="header-cell">Nome</th>
+          <td mat-cell *matCellDef="let cliente" class="cell name-cell">
+            <div class="name-wrapper">
+              <mat-icon class="person-icon">person</mat-icon>
+              <span class="name-text">{{ cliente.nome }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- CPF -->
+        <ng-container matColumnDef="cpf">
+          <th mat-header-cell *matHeaderCellDef class="header-cell">CPF</th>
+          <td mat-cell *matCellDef="let cliente" class="cell cpf-cell">
+            <div class="cpf-wrapper">
+              <mat-icon class="cpf-icon">badge</mat-icon>
+              <span class="cpf-text">{{ formatarCPF(cliente.cpf) }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- DATA NASCIMENTO -->
+        <ng-container matColumnDef="dataNascimento">
+          <th mat-header-cell *matHeaderCellDef class="header-cell">Data Nasc.</th>
+          <td mat-cell *matCellDef="let cliente" class="cell date-cell">
+            <div class="date-wrapper" *ngIf="cliente.dataNascimento; else noDate">
+              <mat-icon class="date-icon">cake</mat-icon>
+              <span class="date-text">{{ cliente.dataNascimento}}</span>
+            </div>
+            <ng-template #noDate>
+              <span class="no-date">Não informada</span>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <!-- EMAIL -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="header-cell">Email</th>
+          <td mat-cell *matCellDef="let cliente" class="cell email-cell">
+            <div class="email-wrapper">
+              <mat-icon class="email-icon">email</mat-icon>
+              <a [href]="'mailto:' + cliente.email" class="email-link">{{ cliente.email }}</a>
+            </div>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="ufMunicipio">
+          <th mat-header-cell *matHeaderCellDef class="header-cell">UF/Município</th>
+          <td mat-cell *matCellDef="let cliente" class="cell uf-municipio-cell">
+            <div class="uf-municipio-wrapper">
+              <mat-icon class="location-icon">location_on</mat-icon>
+              <span class="uf-municipio-text">
+                {{ formatarUfMunicipio(cliente) }}
+              </span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- AÇÕES -->
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef class="header-cell actions-header">Ações</th>
+          <td mat-cell *matCellDef="let cliente" class="cell actions-cell">
+            <div class="actions-wrapper">
+              <!-- Botão Editar -->
+              <button mat-mini-fab color="primary" matTooltip="Editar cliente" matTooltipPosition="above" (click)="preparaEditar(cliente.id)" class="action-btn edit-btn">
                 <mat-icon>edit</mat-icon>
               </button>
+
+              <!-- Botões de Excluir/Confirmar -->
               @if (deletando !== cliente.id) {
-              <button
-                mat-icon-button
-                color="warn"
-                (click)="preparaDeletar(cliente.id)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
+                <button mat-mini-fab color="warn" matTooltip="Excluir cliente" matTooltipPosition="above" (click)="preparaDeletar(cliente.id)" class="action-btn delete-btn">
+                  <mat-icon>delete</mat-icon>
+                </button>
               } @else {
-              <button mat-icon-button color="warn" (click)="deletar(cliente)">
-                <mat-icon>check</mat-icon>
-              </button>
+                <button mat-mini-fab color="warn" matTooltip="Confirmar exclusão" matTooltipPosition="above" (click)="deletar(cliente)" class="action-btn confirm-btn">
+                  <mat-icon>check</mat-icon>
+                </button>
 
-              <button mat-icon-button (click)="cancelarDeletar()">
-                <mat-icon>close</mat-icon>
-              </button>
+                <button mat-mini-fab color="basic" matTooltip="Cancelar" matTooltipPosition="above" (click)="cancelarDeletar()" class="action-btn cancel-btn">
+                  <mat-icon>close</mat-icon>
+                </button>
               }
-            </td></ng-container
-          >
+            </div>
+          </td>
+        </ng-container>
 
-          <tr mat-header-row*matHeaderRowDef="['id','nome','dataNascimento','email','acoes']"></tr>
-          <tr mat-row *matRowDef=" let row; columns: ['id','nome','dataNascimento','email','acoes']"></tr>
-        </table>
+        <tr mat-header-row *matHeaderRowDef="colunasTable" class="header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunasTable" class="data-row"></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Mensagem quando não há resultados -->
+  <div *ngIf="listaClientes && listaClientes.length === 0" class="no-results">
+    <mat-card class="empty-card">
+      <mat-card-content>
+        <div class="empty-content">
+          <mat-icon class="empty-icon">search_off</mat-icon>
+          <h3>Nenhum cliente encontrado</h3>
+          <p>Não foram encontrados clientes com o critério de busca informado.</p>
+          <button mat-stroked-button color="primary" (click)="limparBusca()">
+            <mat-icon>refresh</mat-icon>
+            Limpar busca e ver todos
+          </button>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
