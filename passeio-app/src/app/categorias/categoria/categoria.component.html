@@ -1,18 +1,18 @@
 <div class="p-6 max-w-lg mx-auto bg-white shadow-lg rounded-lg mt-6">
     <h2 class="text-2xl font-semibold text-gray-700 mg-4">Nova Categoria</h2>
-    <form action="" id="categoriaForm">
+    <form action="" id="categoriaForm" [formGroup]="camposForm" (ngSubmit)="salvar()">
         <!-- Campo Nome -->
         <div class="mb-4">
             <label class="block text-gray-600 font-medium mb-2">Nome:</label>
-            <input type="text" id="nome" name="nome" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200" required/>
-            <span class="text-red-500 text-sm">
+            <input type="text" id="nome" name="nome" formControlName="nome" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200" required/>
+            <span class="text-red-500 text-sm" *ngIf="isCampoInvalido('nome')">
                 Campo obrigatório
             </span>
         </div>
         <div class="mb-4">
             <label class="block text-gray-600 font-medium mb-2">Descrição:</label>
-            <textarea rows="4" id="descricao" name="descricao" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200" required></textarea>
-            <span class="text-red-500 text-sm">
+            <textarea rows="4" id="descricao" name="descricao" formControlName="descricao" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200" required></textarea>
+            <span class="text-red-500 text-sm" *ngIf="isCampoInvalido('descricao')">
                 Campo obrigatório
             </span>
         </div>

@@ -1,0 +1,9 @@
+{
+    "categorias":[
+        {
+            "id": 1,
+            "nome": "Restaurantes",
+            "descricao": "Estabelecimentos que oferecem refeições e bebidas."
+        }
+    ]
+}
