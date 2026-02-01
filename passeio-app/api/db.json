@@ -1,9 +1,14 @@
 {
-    "categorias":[
-        {
-            "id": 1,
-            "nome": "Restaurantes",
-            "descricao": "Estabelecimentos que oferecem refeições e bebidas."
-        }
-    ]
+  "categorias": [
+    {
+      "id": "bdea",
+      "nome": "Shoppings",
+      "descricao": "Lugares para fazer compras e passear com a familia."
+    },
+    {
+      "id": "5ffd",
+      "nome": "Restaurantes",
+      "descricao": "Lugares para comer com a familia"
+    }
+  ]
 }
