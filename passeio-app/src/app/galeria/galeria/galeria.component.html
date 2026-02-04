@@ -36,17 +36,23 @@
         Localização: {{ lugar.localizacao }}
       </p>
 
-      <div class="mt-2 flex items-center">
-        <span class="text-yellow-500">
-          <ng-container *ngFor="let star of [].constructor(lugar.avaliacoes)">
-            ★
-          </ng-container>
-        </span>
+     <div class="mt-2 flex items-center">
+  <ng-container *ngFor="let estrela of getEstrelas(lugar.avaliacoes ?? 0)">
+    <svg *ngIf="estrela === 1" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.955h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448 1.287 3.955c.3.921-.755 1.688-1.54 1.118L10 13.348l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.955-3.37-2.448c-.783-.57-.38-1.81.588-1.81h4.162L9.05 2.927z"/>
+    </svg>
 
-        <span class="ml-2 text-gray-600">
-          {{ lugar.avaliacoes }}
-        </span>
-      </div>
+    <svg *ngIf="estrela === 0" class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.955h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448 1.287 3.955c.3.921-.755 1.688-1.54 1.118L10 13.348l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.955-3.37-2.448c-.783-.57-.38-1.81.588-1.81h4.162L9.05 2.927z"/>
+    </svg>
+  </ng-container>
+
+  <span class="ml-2 text-gray-600 text-sm">
+    {{ lugar.avaliacoes ?? 0 }}
+  </span>
+</div>
+
+
     </div>
   </div>
 

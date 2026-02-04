@@ -25,4 +25,9 @@ export class GaleriaComponent implements OnInit {
     this.lugarService.obterTodos().subscribe(lugaresResposta => this.lugares = lugaresResposta)
   }
 
+  getEstrelas(qtd: number): number[] {
+  return Array(5).fill(0).map((_, i) => i < qtd ? 1 : 0);
+  }
+
+
 }
