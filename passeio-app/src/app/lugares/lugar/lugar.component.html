@@ -13,7 +13,7 @@
       <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
       <select id="categoria" name="categoria" formControlName="categoria" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
         <option [value]="null">Selecione uma categoria</option>
-        <option *ngFor="let cat of categorias" [value]="cat.id">
+        <option *ngFor="let cat of categorias" [value]="cat.nome">
           {{ cat.nome }}
         </option>
       </select>
