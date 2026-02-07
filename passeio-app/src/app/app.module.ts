@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { LandinpageComponent } from './landinpage/landinpage.component';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +16,8 @@ import { LandinpageComponent } from './landinpage/landinpage.component';
     AppRoutingModule
   ],
   providers: [
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    provideOAuthClient()
   ],
   bootstrap: [AppComponent]
 })
