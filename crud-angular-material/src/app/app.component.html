@@ -1,49 +1,65 @@
 <div class="app-container">
-  <!-- Toolbar principal -->
-  <mat-toolbar class="main-toolbar" color="primary">
+
+  <!-- Toolbar -->
+  <mat-toolbar class="main-toolbar" color="primary" *ngIf="auth.isLogged()">
     <div class="toolbar-content">
-      <!-- Logo/Título - Alinhado à esquerda -->
+
+      <!-- Logo -->
       <div class="brand-section">
         <mat-icon class="brand-icon">group</mat-icon>
         <h1 class="app-title">Cadastro de Clientes</h1>
       </div>
-      
-      <!-- Menu de navegação - Centralizado -->
+
+      <!-- Menu -->
       <nav class="nav-section">
         <a routerLink="/cadastro" routerLinkActive="active-link">
           <div class="nav-item">
-            <mat-icon fontIcon="feed"></mat-icon>
+            <mat-icon>feed</mat-icon>
             <span class="nav-text">Formulário de Cadastro</span>
           </div>
         </a>
 
         <a routerLink="/consulta" routerLinkActive="active-link">
           <div class="nav-item">
-            <mat-icon fontIcon="search"></mat-icon>
+            <mat-icon>search</mat-icon>
             <span class="nav-text">Consulta de Clientes</span>
           </div>
         </a>
       </nav>
 
-      <div class="status-section">
-        <div class="status-indicator">
-          <mat-icon class="status-icon">check_circle</mat-icon>
-          <span>Sistema Ativo</span>
+      <!-- Área do usuário -->
+      <div class="user-section">
+
+        <div class="user-info">
+          <div class="avatar">MR</div>
+          <span class="user-name">Mikael</span>
         </div>
+
+        <button class="logout-btn" (click)="logout()">
+          <mat-icon class="logout-icon">logout</mat-icon>
+          <span>Sair</span>
+        </button>
+
       </div>
+
     </div>
   </mat-toolbar>
-  <!-- Conteúdo principal -->
+
+  <!-- Conteúdo -->
   <main class="main-content">
     <div class="content-wrapper">
       <router-outlet></router-outlet>
     </div>
   </main>
+
   <!-- Footer -->
-  <footer class="app-footer">
+  <footer class="app-footer" *ngIf="auth.isLogged()">
     <div class="footer-content">
       <p>Sistema de Cadastro de Clientes v1.0</p>
-      <p class="copyright">© 2026 - Desenvolvido por Mikael Ribeiro com Angular Material</p>
+      <p class="copyright">
+        © 2026 - Desenvolvido por Mikael Ribeiro com Angular Material
+      </p>
     </div>
   </footer>
+
 </div>

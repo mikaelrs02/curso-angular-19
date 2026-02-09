@@ -17,7 +17,7 @@
         <div class="form-row">
           <mat-form-field appearance="outline" class="search-field">
             <mat-label>Nome do cliente</mat-label>
-            <input matInput placeholder="Ex: Mikael Ribeiro" name="nomeBusca" [(ngModel)]="nomeBusca" class="search-input"/>
+            <input  matInput placeholder="Buscar cliente" [(ngModel)]="nomeBusca" name="busca" (keyup)="aplicarFiltroTempoReal()">
             <mat-icon matPrefix class="prefix-icon">person</mat-icon>
             <button mat-icon-button matSuffix *ngIf="nomeBusca" (click)="limparBusca()" type="button" class="clear-button">
               <mat-icon>close</mat-icon>
@@ -31,10 +31,10 @@
             Limpar Busca
           </button>
 
-          <button mat-raised-button type="submit" color="primary" class="search-btn"[disabled]="!nomeBusca">
+          <!-- <button mat-raised-button type="submit" color="primary" class="search-btn"[disabled]="!nomeBusca">
             <mat-icon>search</mat-icon>
             Buscar Clientes
-          </button>
+          </button> -->
         </div>
       </form>
     </mat-card-content>

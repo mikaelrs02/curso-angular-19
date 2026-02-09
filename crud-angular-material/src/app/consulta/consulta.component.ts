@@ -114,4 +114,9 @@ export class ConsultaComponent implements OnInit {
     return 'Não informado';
   }
 }
+
+aplicarFiltroTempoReal(): void {
+  this.listaClientes = this.service.pesquisarClientes(this.nomeBusca);
+}
+
 }

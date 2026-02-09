@@ -138,6 +138,7 @@ export class CadastroComponent implements OnInit {
       this.mostrarSucesso('Cliente cadastrado com sucesso!');
       this.cliente = Cliente.newCliente();
       form.resetForm();
+      this.router.navigate(['/consulta']);
     } else {
       this.clienteService.atualizar(this.cliente);
       this.mostrarSucesso('Cliente atualizado com sucesso!');
@@ -145,32 +146,24 @@ export class CadastroComponent implements OnInit {
     }
   }
 
-  // MÉTODO ADICIONADO PARA LIMPAR FORMULÁRIO
   limparFormulario(form?: any): void {
-    // Resetar o objeto cliente
     this.cliente = Cliente.newCliente();
     
-    // Se um formulário foi passado, resetar ele também
     if (form) {
       form.resetForm();
     }
     
-    // Resetar os filtros
     if (this.estados.length > 0) {
       this.filteredEstados = [...this.estados];
     }
     
-    // Resetar municípios
     this.municipios = [];
     this.filteredMunicipios = [];
     
-    // Resetar estado de atualização
     this.atualizando = false;
     
-    // Navegar para a rota sem parâmetros
     this.router.navigate(['/cadastro']);
     
-    // Mostrar feedback
     this.snackBar.open('Formulário limpo com sucesso!', 'OK', {
       duration: 2000,
       horizontalPosition: 'right',

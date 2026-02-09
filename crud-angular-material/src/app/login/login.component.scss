@@ -1,0 +1,76 @@
+$primary: #3f51b5;
+
+.login-page {
+  height: calc(100vh - 140px); // respeita toolbar + footer
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3f51b515, #5c6bc015);
+}
+
+/* card */
+.login-card {
+  width: 360px;
+  padding: 30px;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+  animation: fadeUp .6s ease;
+}
+
+/* header */
+.login-header {
+  text-align: center;
+  margin-bottom: 20px;
+
+  mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: $primary;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+  }
+
+  p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #777;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  button {
+    height: 45px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+}
+
+.erro {
+  text-align: center;
+  color: #e53935;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+/* animação */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

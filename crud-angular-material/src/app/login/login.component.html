@@ -1,0 +1,33 @@
+<div class="login-page">
+  <mat-card class="login-card">
+
+    <div class="login-header">
+      <mat-icon>group</mat-icon>
+      <h2>Bem-vindo</h2>
+      <p>Acesse o sistema de clientes</p>
+    </div>
+
+    <form (ngSubmit)="entrar()" class="login-form">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Usuário</mat-label>
+        <input matInput [(ngModel)]="usuario" name="usuario" required>
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" [(ngModel)]="senha" name="senha" required>
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        Entrar
+      </button>
+
+      <p *ngIf="erro" class="erro">Usuário ou senha inválidos</p>
+
+    </form>
+
+  </mat-card>
+</div>
